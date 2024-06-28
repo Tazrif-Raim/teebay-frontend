@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import RegisterForm from '../components/auth/RegisterForm';
 import PublicHeader from '../components/common/PublicHeader';
+import '../styles/auth.css';
 
 function Registration()
 {
@@ -23,8 +24,10 @@ function Registration()
     return (
         <div>
             <PublicHeader />
-            <h2>Register</h2>
+            <div className='bodyy'>
             <RegisterForm onSubmit={handleRegister} />
+            </div>
+            
         </div>
     );
 }

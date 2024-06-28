@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import ProductCard from '../components/product/ProductCard';
 import '../styles/Product.css';
 import '../styles/LoggedInHeader.css';
+import '../styles/modal.css';
 
 const UserProductTransaction = () => {
     const { loading, error, data } = useQuery(GET_PRODUCTS_RELATED_TO_USER);
@@ -74,10 +75,10 @@ const UserProductTransaction = () => {
       <h2 className="product-grid">My Transactions</h2>
       <div className="product-grid logged-in-header">
         <nav>
-            <button onClick={()=>handleTransactionType("Bought")} className="trans-button">Bought</button>
-            <button onClick={()=>handleTransactionType("Sold")}  className="trans-button">Sold</button>
-            <button onClick={()=>handleTransactionType("Borrowed")} className="trans-button">Borrowed</button>
-            <button onClick={()=>handleTransactionType("Lent")} className="trans-button">Lent</button>
+            <button onClick={()=>handleTransactionType("Bought")} className="trans-button modal-button-confirm">Bought</button>
+            <button onClick={()=>handleTransactionType("Sold")}  className="trans-button modal-button-confirm">Sold</button>
+            <button onClick={()=>handleTransactionType("Borrowed")} className="trans-button modal-button-confirm">Borrowed</button>
+            <button onClick={()=>handleTransactionType("Lent")} className="trans-button modal-button-confirm">Lent</button>
         </nav>
         
       </div>

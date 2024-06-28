@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import client from '../services/client';
 import flatpickr from 'flatpickr'
 import "flatpickr/dist/themes/material_blue.css";
+import '../styles/modal.css';
 
 function ProductDescTrans()
 {
@@ -151,26 +152,30 @@ function ProductDescTrans()
             <p>Status: {product.status}</p>
             {product.status!=='SOLD' && (
             <>
-                <button onClick={handleBuy}>Buy</button>
-                <button onClick={handleRent}>Rent</button>
+                <button onClick={handleBuy} className='modal-button-confirm'>Buy</button>
+                <button onClick={handleRent} className='modal-button-confirm'>Rent</button>
             </>
             )   
             }
             {buyProduct && (
-                <div>
+                <div className='modal-overlay'>
+                <div className='modal-content'>
                     <p>Are you sure you want to buy this product?</p>
-                    <button onClick={handleBuyConfirm}>Yes</button>
-                    <button onClick={handleBuyCancel}>No</button>
+                    <button onClick={handleBuyConfirm} className='modal-button-confirm'>Yes</button>
+                    <button onClick={handleBuyCancel} className='modal-button-cancel'>No</button>
+                </div>
                 </div>
             )}
             {rentProduct && (
-                <div>
+                <div className='modal-overlay'>
+                <div className='modal-content'>
                     <p>Select dates</p>
                     <div>
                         <input type="text" id="rentDates" />
                     </div>
-                    <button onClick={handleRentConfirm}>Yes</button>
-                    <button onClick={handleRentCancel}>No</button>
+                    <button onClick={handleRentConfirm} className='modal-button-confirm'>Yes</button>
+                    <button onClick={handleRentCancel} className='modal-button-cancel'>No</button>
+                </div>
                 </div>
             )}
         </div>

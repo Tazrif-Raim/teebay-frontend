@@ -9,6 +9,8 @@ import { useMutation } from '@apollo/client';
 import { CREATE_PRODUCT } from '../services/queries';
 import { useNavigate } from 'react-router-dom';
 import client from '../services/client';
+import '../styles/auth.css';
+import '../styles/modal.css';
 
 const CreateProduct = () => {
   const methods = useForm({
@@ -52,6 +54,7 @@ const CreateProduct = () => {
   };
 
   return (
+    <div className='bodyy'>
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleSubmit)}>
         {currentPage === 0 && <TitlePage />}
@@ -60,15 +63,16 @@ const CreateProduct = () => {
         {currentPage === 3 && <PricePage />}
         {currentPage === 4 && <SummaryPage />}
         <div>
-          {currentPage > 0 && <input type="button" onClick={handleBack} value="Back"/>}
+          {currentPage > 0 && <input type="button" onClick={handleBack} value="Back" className='modal-button-confirm'/>}
           {currentPage < 4 ? (
-            <input type="button" onClick={handleNext} value="Next"/>
+            <input type="button" onClick={handleNext} value="Next" className='modal-button-confirm'/>
           ) : (
-            <button type="submit">Submit</button>
+            <button type="submit" className='modal-button-confirm'>Submit</button>
           )}
         </div>
       </form>
     </FormProvider>
+    </div>
   );
 };
 

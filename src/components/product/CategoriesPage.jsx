@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import '../../styles/auth.css';
 
 const CategoriesPage = () => {
   const { register, watch } = useFormContext();
@@ -7,7 +8,7 @@ const CategoriesPage = () => {
   const selectedCategories = watch('categories', []);
 
   return (
-    <div>
+    <div className='form-container'>
       <h2>Create Product</h2>
       {categories.map((category) => (
         <div key={category}>

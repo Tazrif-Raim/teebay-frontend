@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import LoginForm from '../components/auth/LoginForm';
 import PublicHeader from '../components/common/PublicHeader';
+import '../styles/auth.css';
 
 function Login()
 {
@@ -22,8 +23,10 @@ function Login()
     return (
         <div>
             <PublicHeader />
-            <h2>Login</h2>
+            <div className='bodyy'>
             <LoginForm onSubmit={handleLogin} />
+            </div>
+            
         </div>
     );
 }

@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 const RegisterForm = ({ onSubmit }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   return (
+    <div className='form-container'>
+        <h2>Register</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
         <div>
             <label htmlFor="firstName">First Name</label>
@@ -34,6 +36,7 @@ const RegisterForm = ({ onSubmit }) => {
         </div>
         <button type="submit">Register</button>
     </form>
+    </div>
   );
 };
 

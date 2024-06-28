@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import '../../styles/modal.css';
 
 const ProductCard = ({ product, link, showDeleteButton, onDelete }) => {
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -26,8 +27,11 @@ const ProductCard = ({ product, link, showDeleteButton, onDelete }) => {
     };
 
   return (
-    <div key={product.id} className="product-card">
-        <Link to={link}>{product.title}</Link>
+    <>
+    <div className='product-card' key={product.id}>
+    <Link to={link} className='text-zero'>
+    <div key={product.id} >
+        {product.title}
         <div>Categories:
             {product.categories.map((category, index) => (
             <span key={index}>|{category.category_name}| </span>
@@ -37,19 +41,25 @@ const ProductCard = ({ product, link, showDeleteButton, onDelete }) => {
         <p>Rent Price (Daily): ${product.rent_price_daily}</p>
         <p>{product.description}</p>
         <p>Status: {product.status}</p>
+    </div>
+        </Link>
+        
         {showDeleteButton && (product.status==='AVAILABLE') && (
         <>
-          <button onClick={handleDelete}>Delete</button>
+          <button onClick={handleDelete} className='modal-button-confirm'>Delete</button>
           {showConfirmation && (
-            <div className="delete-confirmation">
-              <p>Are you sure you want to delete this product?</p>
-              <button onClick={handleConfirmDelete}>Yes</button>
-              <button onClick={handleCancelDelete}>No</button>
+            <div className="modal-overlay">
+              <div className="modal-content">
+                <h2>Are you sure you want to delete this product?</h2>
+                <button onClick={handleConfirmDelete} className='modal-button-confirm'>Yes</button>
+                <button onClick={handleCancelDelete} className='modal-button-cancel'>No</button>
+              </div>
             </div>
           )}
         </>
       )}
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -29,7 +29,6 @@ export const login = async (input) => {
         variables: { input },
       });
     const token = response.data.login;
-    localStorage.removeItem('token');
     localStorage.setItem('token', token);
     return token;
   }catch(error){

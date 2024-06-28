@@ -1,12 +1,13 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import '../../styles/auth.css';
 
 const SummaryPage = () => {
   const { getValues } = useFormContext();
   const values = getValues();
 
   return (
-    <div>
+    <div className='form-container'>
       <h2>Create Product Summary</h2>
       <p>Title: {values.title}</p>
       <p>Description: {values.description}</p>

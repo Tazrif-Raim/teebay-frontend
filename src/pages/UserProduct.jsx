@@ -36,7 +36,7 @@ const UserProduct = () => {
     <div>
         <LoggedInHeader />
       <h2 className="product-grid">My Products</h2>
-      <button onClick={handleAddProduct}>Add Product</button>
+      <h2 className='product-grid'><button onClick={handleAddProduct} className='modal-button-confirm'>Add Product</button></h2>
       <div className="product-grid">
         {data.findAllProductOfUser.map((product) => (
           <ProductCard onDelete={handleDeleteProduct} showDeleteButton={true} key={product.id} product={product} link={`/user/product/${product.id}/edit`}/>
