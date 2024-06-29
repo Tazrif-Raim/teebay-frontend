@@ -8,6 +8,7 @@ import '../styles/LoggedInHeader.css';
 import '../styles/modal.css';
 
 const UserProductTransaction = () => {
+    try{
     const { loading, error, data } = useQuery(GET_PRODUCTS_RELATED_TO_USER);
     const [products, setProducts] = useState([]);
     const [transactionType, setTransactionType] = useState('bought');
@@ -17,16 +18,16 @@ const UserProductTransaction = () => {
     const [lent, setLent] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = () => {
             try {
                 if (!loading && !error && data) {
                     
-                    await setBorrowed(data.findAllProductRelatedToUser.borrowed);
-                    await setLent(data.findAllProductRelatedToUser.lent);
-                    await setSold(data.findAllProductRelatedToUser.sold);
-                    await setBought(data.findAllProductRelatedToUser.bought);
+                    setBorrowed(data.findAllProductRelatedToUser.borrowed);
+                    setLent(data.findAllProductRelatedToUser.lent);
+                    setSold(data.findAllProductRelatedToUser.sold);
+                    setBought(data.findAllProductRelatedToUser.bought);
                     
-                    await setTransactionType("Bought");
+                    setTransactionType("Bought");
                     console.log(data.findAllProductRelatedToUser);
                 }
             } catch (error) {
@@ -60,10 +61,10 @@ const UserProductTransaction = () => {
     }, [transactionType]);
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (error) console.log(error)
 
-    const handleTransactionType = async (type) => {
-        await setTransactionType(type);
+    const handleTransactionType = (type) => {
+        setTransactionType(type);
         console.log(transactionType);
         console.log(bought);
     };
@@ -89,6 +90,10 @@ const UserProductTransaction = () => {
       </div>
     </div>
   );
+}
+catch (error) {
+    console.error(error);
+}
 };
 
 export default UserProductTransaction;

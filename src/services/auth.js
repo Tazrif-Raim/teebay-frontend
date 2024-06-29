@@ -30,6 +30,7 @@ export const login = async (input) => {
       });
     const token = response.data.login;
     localStorage.setItem('token', token);
+    console.log(token); 
     return token;
   }catch(error){
     console.error('Login failed:', error);

@@ -7,6 +7,7 @@ import client from '../services/client';
 import flatpickr from 'flatpickr'
 import "flatpickr/dist/themes/material_blue.css";
 import '../styles/modal.css';
+import LoggedInHeader from '../components/common/LoggedInHeader'
 
 function ProductDescTrans()
 {
@@ -63,8 +64,10 @@ function ProductDescTrans()
             dateFormat: 'Y-m-d',
             disable: [
                 function(date){
+                    
                     for(let i = 0; i < blockedTimes.length; i++){
                         if(date >= new Date(blockedTimes[i].start_date) && date <= new Date(blockedTimes[i].end_date)){
+                            console.log(date, new Date(blockedTimes[i].start_date), new Date(blockedTimes[i].end_date));
                             return true;
                         }
                     }
@@ -82,7 +85,8 @@ function ProductDescTrans()
             refetchQueries: [
                 { query: AVAILABLE_PRODUCTS }, 
                 { query: GET_USER_PRODUCTS }, 
-                { query: GET_PRODUCTS_RELATED_TO_USER }
+                { query: GET_PRODUCTS_RELATED_TO_USER },
+                { query: BOOKING_TIMES, variables: { id: product.id } }
             ]
         }
         );
@@ -108,8 +112,8 @@ function ProductDescTrans()
         if(dateArray.length !== 2){
             dateArray.push(dateArray[0]);
         }
-        const start_time = new Date(dateArray[0]).toISOString();
-        const end_time = new Date(dateArray[1]).toISOString();
+        const start_time = new Date(new Date(dateArray[0]).setHours(0, 0, 0, 0)).toISOString();
+        const end_time = new Date(new Date(dateArray[1]).setHours(23, 59, 59, 999)).toISOString();
         console.log(start_time, end_time);
         client.clearStore();
         const response = await doRentProduct({
@@ -138,7 +142,10 @@ function ProductDescTrans()
 
 
     return (
+        
+        
         <div>
+            <LoggedInHeader />
             <h1>Product</h1>
             <h2>{product.title}</h2>
             <p>Categories:
