@@ -6,10 +6,11 @@ export const useAuth = () => {
 
   const handleLogin = async (input) => {
     try {
-      await login(input);
-
-      await setIsAuthenticated(true);
-      return true;
+      if(await login(input)!==""){
+        setIsAuthenticated(true);
+        return true;
+      }
+      return false;
     } catch (error) {
       console.error('Login failed:', error);
       return false;
@@ -29,7 +30,7 @@ export const useAuth = () => {
   const handleLogout = async() => {
     try{
         await logout();
-        await setIsAuthenticated(false);
+        setIsAuthenticated(false);
         return true;
     }
     catch(error){
